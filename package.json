@@ -1,0 +1,26 @@
+{
+  "name": "news-explorer-api",
+  "version": "0.0.1",
+  "description": "news service",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "eslint": "eslint",
+    "prettier": "prettier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogozhkina/news-explorer-api.git"
+  },
+  "author": "natali rogozhkina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogozhkina/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/rogozhkina/news-explorer-api#readme",
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
