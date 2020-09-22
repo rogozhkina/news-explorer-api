@@ -20,7 +20,17 @@
   },
   "homepage": "https://github.com/rogozhkina/news-explorer-api#readme",
   "devDependencies": {
+    "prettier": "2.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "celebrate": "^13.0.3",
+    "eslint": "^7.9.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.6",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
   }
 }
