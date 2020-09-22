@@ -17,17 +17,22 @@ module.exports.createArticle = (req, res, next) => {
 };
 
 module.exports.deleteArticleById = (req, res, next) => {
+  console.log('ok');
   Article.findById(req.params.id)
     .populate('user')
     .then((article) => {
+      console.log('ok2');
       if (article.owner._id == req.user._id) {
+        console.log('ok3');
         article.remove();
         res.send({ data: article });
       } else if (article.owner._id != req.user._id) {
+        console.log('ok4');
         throw new OwnerError('Нельзя удалять чужую статью');
       }
     })
     .catch((err) => {
+      console.log('ok5');
       next(err);
     });
 };

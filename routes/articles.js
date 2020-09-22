@@ -20,8 +20,13 @@ router.get('/', auth, getArticles);
 
 router.post('/', auth, celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
+    keyword: Joi.string().required().min(2).max(30),
+    title: Joi.string().required().min(2),
+    text: Joi.string().required().min(2),
+    date: Joi.string().required().min(2),
+    source: Joi.string().required().min(2),
     link: Joi.string().required().custom(validatorURL),
+    image: Joi.string().required().custom(validatorURL),
   }),
 }),
 createArticle);

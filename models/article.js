@@ -9,20 +9,19 @@ const articleSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    },
+  },
   text: {
     type: String,
     required: true,
-    },
+  },
   date: {
-      type: Date,
-      required: true,
-      default: Date.now
+    type: Date,
+    required: true,
   },
   source: {
     type: String,
     required: true,
-    },
+  },
   link: {
     type: String,
     required: true,
@@ -45,6 +44,7 @@ const articleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'user',
+    select: false,
   },
 });
 
