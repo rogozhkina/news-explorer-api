@@ -18,10 +18,12 @@ module.exports.createArticle = (req, res, next) => {
 
 module.exports.deleteArticleById = (req, res, next) => {
   console.log('ok');
-  Article.findById(req.params.id)
+  console.log(req.user._id);
+  Article.findById(req.params.id).select('+owner')
     .populate('user')
     .then((article) => {
       console.log('ok2');
+      console.log(article);
       if (article.owner._id == req.user._id) {
         console.log('ok3');
         article.remove();
