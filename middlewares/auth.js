@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 const AuthorizationError = require('../errors/validation-err');
+const { JWT_SECRET = 'secret-key' } = require('../config');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  const { JWT_SECRET = 'secret-key' } = process.env;
+  //const { JWT_SECRET = 'JWT_SECRET' } = process.env;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     console.log(req.headers);

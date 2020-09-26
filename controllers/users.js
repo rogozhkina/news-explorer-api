@@ -3,26 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ValidationError = require('../errors/validation-err');
 const NotFoundError = require('../errors/not-found-err');
-
-// module.exports.getUsersMe = (req, res, next) => {
-//   User.find({})
-//     .then((user) => res.send({ data: user }))
-//     .catch(next);
-// };
-
-// module.exports.getUsersMe = (req, res, next) => {
-//   User.findById(req.params.userId)
-//     .then((user) => {
-//       console.log(user);
-//       if (user != null) {
-//         console.log(user);
-//         res.send({ data: user });
-//       } else if (user === null) {
-//         throw new NotFoundError('Запрашиваемый ресурс не найден');
-//       }
-//     })
-//     .catch(next);
-// };
+const { JWT_SECRET = 'secret-key' } = require('../config');
 
 module.exports.getUsersMe = (req, res, next) => {
   User.findById(req.user._id)
@@ -50,7 +31,7 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  const { JWT_SECRET = 'secret-key' } = process.env;
+  //const { JWT_SECRET = 'JWT_SECRET' } = process.env;
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
