@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-err');
-
 const articles = require('./routes/articles');
 const users = require('./routes/users');
+const limiter = require('./middlewares/limiter');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -22,11 +22,6 @@ mongoose.connect('mongodb://localhost:27017/news-api', {
   useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
-});
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
