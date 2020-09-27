@@ -13,12 +13,12 @@ const limiter = require('./middlewares/limiter');
 const errorHandler = require('./middlewares/error-handler');
 const NotFoundError = require('./errors/not-found-err');
 const routes = require('./routes');
-const { urlAdres } = require('./config');
+const { MONGO_URL } = require('./config');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
-mongoose.connect(urlAdres, {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
