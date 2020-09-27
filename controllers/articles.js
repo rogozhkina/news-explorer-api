@@ -1,5 +1,6 @@
 const Article = require('../models/article');
 const OwnerError = require('../errors/owner-err');
+const { ownerMessage } = require('../middlewares/messages');
 
 module.exports.getArticles = (req, res, next) => {
   Article.find({})
@@ -17,7 +18,7 @@ module.exports.createArticle = (req, res, next) => {
     keyword, title, text, date, source, image, link, owner: userId,
   })
     .then((article) => {
-      // delete article.owner не работает
+      // скрыть article.owner через delete не получилось
       res.send({
         data: {
           _id: article._id,
@@ -53,7 +54,7 @@ module.exports.deleteArticleById = (req, res, next) => {
           },
         });
       } else if (article.owner._id != req.user._id) {
-        throw new OwnerError('Нельзя удалять чужую статью');
+        throw new OwnerError(ownerMessage);
       }
     })
     .catch((err) => {

@@ -4,6 +4,7 @@ const User = require('../models/user');
 const ValidationError = require('../errors/validation-err');
 const NotFoundError = require('../errors/not-found-err');
 const { JWT_SECRET } = require('../config');
+const { notFoundMessage, validMessage } = require('../middlewares/messages');
 
 module.exports.getUsersMe = (req, res, next) => {
   User.findById(req.user._id)
@@ -11,7 +12,7 @@ module.exports.getUsersMe = (req, res, next) => {
       if (user != null) {
         res.send({ data: { name: user.name, email: user.email } });
       } else if (user === null) {
-        throw new NotFoundError('Запрашиваемый ресурс не найден');
+        throw new NotFoundError(notFoundMessage);
       }
     })
     .catch(next);
@@ -20,7 +21,7 @@ module.exports.getUsersMe = (req, res, next) => {
 module.exports.createUser = (req, res, next) => {
   const { name, email, password } = req.body;
   if ((password === undefined) || (password.trim().length < 8)) {
-    throw new ValidationError('Некорректные данные');
+    throw new ValidationError(validMessage);
   }
   bcrypt.hash(password, 10)
     .then((hash) => User.create({ name, email, password: hash }))

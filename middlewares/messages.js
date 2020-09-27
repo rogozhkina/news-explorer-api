@@ -3,6 +3,11 @@ const maxLengthMessage = 'Длина поля должна быть не бол�
 const requiredMessage = 'Обязательное поле';
 const passwordMessage = 'Пароль должен быть не менее 8 символов';
 const emailMessage = 'Здесь должен быть корректный адрес электронной почты';
+const authMessage = 'Необходима авторизация';
+const ownerMessage = 'Нельзя удалять чужую статью';
+const notFoundMessage = 'Запрашиваемый ресурс не найден';
+const validMessage = 'Некорректные данные';
+const userMessage = 'Такой пользователь уже существует';
 
 module.exports = {
   minLengthMessage,
@@ -10,4 +15,9 @@ module.exports = {
   requiredMessage,
   passwordMessage,
   emailMessage,
+  authMessage,
+  ownerMessage,
+  notFoundMessage,
+  validMessage,
+  userMessage,
 };
