@@ -1,5 +1,6 @@
 const Article = require('../models/article');
 const OwnerError = require('../errors/owner-err');
+const { populate } = require('../models/article');
 
 module.exports.getArticles = (req, res, next) => {
   Article.find({})
@@ -16,7 +17,21 @@ module.exports.createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, image, link, owner: userId,
   })
-    .then((article) => res.send({ data: article }))
+    .then((article) => {
+      // delete article.owner не работает
+      res.send({
+        data: {
+          _id: article._id,
+          keyword: article.keyword,
+          title: article.title,
+          text: article.text,
+          date: article.data,
+          source: article.source,
+          image: article.image,
+          link: article.link,
+        },
+      });
+    })
     .catch(next);
 };
 
