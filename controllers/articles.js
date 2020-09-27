@@ -41,7 +41,18 @@ module.exports.deleteArticleById = (req, res, next) => {
     .then((article) => {
       if (article.owner._id == req.user._id) {
         article.remove();
-        res.send({ data: article });
+        res.send({
+          data: {
+            _id: article._id,
+            keyword: article.keyword,
+            title: article.title,
+            text: article.text,
+            date: article.data,
+            source: article.source,
+            image: article.image,
+            link: article.link,
+          },
+        });
       } else if (article.owner._id != req.user._id) {
         throw new OwnerError('Нельзя удалять чужую статью');
       }
