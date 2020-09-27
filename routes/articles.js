@@ -4,9 +4,10 @@ const { celebrate, Joi } = require('celebrate');
 Joi.objectId = require('joi-objectid')(Joi);
 const auth = require('../middlewares/auth');
 const ValidationError = require('../errors/validation-err');
+const { minLengthMessage, requiredMessage } = require('../middlewares/messages');
 
 const {
-  getArticles, createArticle, deleteArticleById
+  getArticles, createArticle, deleteArticleById,
 } = require('../controllers/articles');
 
 const validatorURL = (link) => {
@@ -20,13 +21,35 @@ router.get('/', auth, getArticles);
 
 router.post('/', auth, celebrate({
   body: Joi.object().keys({
-    keyword: Joi.string().required().min(2).max(30),
-    title: Joi.string().required().min(2),
-    text: Joi.string().required().min(2),
-    date: Joi.string().required().min(2),
-    source: Joi.string().required().min(2),
-    link: Joi.string().required().custom(validatorURL),
-    image: Joi.string().required().custom(validatorURL),
+    keyword: Joi.string().required().min(2)
+      .messages({
+        'string.min': `keyword - ${minLengthMessage}`,
+        'any.required': `keyword - ${requiredMessage}`,
+      }),
+    title: Joi.string().required()
+      .messages({
+        'any.required': `title - ${requiredMessage}`,
+      }),
+    text: Joi.string().required()
+      .messages({
+        'any.required': `text - ${requiredMessage}`,
+      }),
+    date: Joi.string().required()
+      .messages({
+        'any.required': `date - ${requiredMessage}`,
+      }),
+    source: Joi.string().required()
+      .messages({
+        'any.required': `source - ${requiredMessage}`,
+      }),
+    link: Joi.string().required().custom(validatorURL)
+      .messages({
+        'any.required': `link - ${requiredMessage}`,
+      }),
+    image: Joi.string().required().custom(validatorURL)
+      .messages({
+        'any.required': `image - ${requiredMessage}`,
+      }),
   }),
 }),
 createArticle);

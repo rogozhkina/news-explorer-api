@@ -4,7 +4,8 @@ const validator = require('validator');
 const articleSchema = new mongoose.Schema({
   keyword: {
     type: String,
-    required: true
+    required: true,
+    minlength: 2,
   },
   title: {
     type: String,
@@ -28,8 +29,8 @@ const articleSchema = new mongoose.Schema({
     validate: {
       validator(link) {
         return validator.isURL(link);
-      }
-    }
+      },
+    },
   },
   image: {
     type: String,
@@ -37,8 +38,8 @@ const articleSchema = new mongoose.Schema({
     validate: {
       validator(link) {
         return validator.isURL(link);
-      }
-    }
+      },
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

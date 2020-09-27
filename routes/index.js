@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const articles = require('./articles');
 const users = require('./users');
 
