@@ -36,10 +36,6 @@ app.use(routes);
 app.use(errorLogger);
 app.use(errors());
 
-app.all('/*', (req, res) => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
-});
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
