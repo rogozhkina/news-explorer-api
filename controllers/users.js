@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ValidationError = require('../errors/validation-err');
 const NotFoundError = require('../errors/not-found-err');
-const { JWT_SECRET = 'secret-key' } = require('../config');
+const { JWT_SECRET } = require('../config');
 
 module.exports.getUsersMe = (req, res, next) => {
   User.findById(req.user._id)
