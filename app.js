@@ -13,6 +13,7 @@ const NotFoundError = require('./errors/not-found-err');
 const articles = require('./routes/articles');
 const users = require('./routes/users');
 const limiter = require('./middlewares/limiter');
+const routes = require('./routes');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -33,8 +34,10 @@ app.use(helmet());
 
 app.use(requestLogger);
 
-app.use('/articles', articles);
-app.use('/users', users);
+// app.use('/articles', articles);
+// app.use('/users', users);
+
+app.use(routes);
 
 app.use(errorLogger);
 app.use(errors());
