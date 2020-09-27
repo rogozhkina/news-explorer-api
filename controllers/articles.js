@@ -1,6 +1,5 @@
 const Article = require('../models/article');
 const OwnerError = require('../errors/owner-err');
-const { populate } = require('../models/article');
 
 module.exports.getArticles = (req, res, next) => {
   Article.find({})

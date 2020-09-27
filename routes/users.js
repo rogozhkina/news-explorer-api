@@ -19,6 +19,7 @@ router.post('/signin', celebrate({
     email: Joi.string().required().email()
       .messages({
         'any.required': `email - ${requiredMessage}`,
+        'string.email': `email - ${emailMessage}`,
       }),
     password: Joi.string().required().min(8)
       .messages({
@@ -32,8 +33,8 @@ router.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30)
       .messages({
-        'string.min': `keyword - ${minLengthMessage}`,
-        'string.max': `keyword - ${maxLengthMessage}`,
+        'string.min': `name - ${minLengthMessage}`,
+        'string.max': `name - ${maxLengthMessage}`,
         'any.required': `name - ${requiredMessage}`,
       }),
     email: Joi.string().required().email()
