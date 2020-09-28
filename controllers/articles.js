@@ -3,7 +3,7 @@ const OwnerError = require('../errors/owner-err');
 const { ownerMessage } = require('../middlewares/messages');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .populate('user')
     .then((articles) => res.send({ data: articles }))
     .catch(next);
