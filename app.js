@@ -34,7 +34,6 @@ app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
