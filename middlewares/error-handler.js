@@ -9,6 +9,7 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === 'MongoError') {
     res.status('409').send({ message: userMessage });
   } else { res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message }); }
+  next();
 };
 
 module.exports = errorHandler;
