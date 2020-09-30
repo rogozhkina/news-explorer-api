@@ -8,6 +8,7 @@ const ownerMessage = 'Нельзя удалять чужую статью';
 const notFoundMessage = 'Запрашиваемый ресурс не найден';
 const validMessage = 'Некорректные данные';
 const userMessage = 'Такой пользователь уже существует';
+const validationMessage = 'Неправильные почта или пароль';
 
 module.exports = {
   minLengthMessage,
@@ -20,4 +21,5 @@ module.exports = {
   notFoundMessage,
   validMessage,
   userMessage,
+  validationMessage,
 };

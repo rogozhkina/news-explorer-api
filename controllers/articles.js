@@ -15,7 +15,7 @@ module.exports.createArticle = (req, res, next) => {
   } = req.body;
   const userId = req.user._id;
   Article.create({
-    keyword, title, text, date, source, image, link, owner: userId,
+    keyword, title, text, date, source, link, image, owner: userId,
   })
     .then((article) => {
       // скрыть article.owner через delete не получилось
@@ -25,10 +25,10 @@ module.exports.createArticle = (req, res, next) => {
           keyword: article.keyword,
           title: article.title,
           text: article.text,
-          date: article.data,
+          date: article.date,
           source: article.source,
-          image: article.image,
           link: article.link,
+          image: article.image,
         },
       });
     })
@@ -47,10 +47,10 @@ module.exports.deleteArticleById = (req, res, next) => {
             keyword: article.keyword,
             title: article.title,
             text: article.text,
-            date: article.data,
+            date: article.date,
             source: article.source,
-            image: article.image,
             link: article.link,
+            image: article.image,
           },
         });
       } else if (article.owner._id != req.user._id) {

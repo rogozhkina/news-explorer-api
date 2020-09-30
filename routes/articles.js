@@ -34,7 +34,7 @@ router.post('/', auth, celebrate({
       .messages({
         'any.required': `text - ${requiredMessage}`,
       }),
-    date: Joi.string().required()
+    date: Joi.date().required()
       .messages({
         'any.required': `date - ${requiredMessage}`,
       }),
