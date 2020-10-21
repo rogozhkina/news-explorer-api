@@ -7,6 +7,7 @@ const path = require('path');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./middlewares/limiter');
@@ -14,8 +15,27 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes');
 const { MONGO_URL } = require('./config');
 
+const corsOptions = {
+  origin: [
+    'https://tashunina.ru',
+    'http://localhost:8080',
+    'https://rogozhkina.github.io',
+    'https://newsapi.org',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: [
+    'Content-Type',
+    'origin',
+    'x-access-token'
+  ],
+  credentials: true
+}
+
 const { PORT = 3000 } = process.env;
 const app = express();
+app.use('*', cors(corsOptions));
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
@@ -24,7 +44,8 @@ mongoose.connect(MONGO_URL, {
   useUnifiedTopology: true,
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(limiter);
