@@ -19,8 +19,11 @@ const corsOptions = {
   origin: [
     'https://tashunina.ru',
     'http://localhost:8080',
+    'https://localhost:8080',
     'https://rogozhkina.github.io',
     'https://newsapi.org',
+    'https://newsapi.org/v2/',
+    'https://nomoreparties.co/news/v2/everything',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
@@ -28,13 +31,16 @@ const corsOptions = {
   allowedHeaders: [
     'Content-Type',
     'origin',
-    'x-access-token'
+    'x-access-token',
+    'Access-Control-Allow-Headers',
+    'Authorization',
   ],
-  credentials: true
+  credentials: true,
 }
 
 const { PORT = 3000 } = process.env;
 const app = express();
+
 app.use('*', cors(corsOptions));
 
 mongoose.connect(MONGO_URL, {
@@ -43,6 +49,8 @@ mongoose.connect(MONGO_URL, {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
+
+
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
