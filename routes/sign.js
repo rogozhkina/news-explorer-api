@@ -17,7 +17,7 @@ router.post('/signin', celebrate({
         'any.required': `email - ${requiredMessage}`,
         'string.email': `email - ${emailMessage}`,
       }),
-    password: Joi.string().required().min(8)
+    password: Joi.string().required().min(2)
       .messages({
         'string.min': `password - ${passwordMessage}`,
         'any.required': `password - ${requiredMessage}`,
@@ -38,7 +38,7 @@ router.post('/signup', celebrate({
         'any.required': `email - ${requiredMessage}`,
         'string.email': `email - ${emailMessage}`,
       }),
-    password: Joi.string().required().min(8)
+    password: Joi.string().required().min(2)
       .messages({
         'string.min': `password - ${passwordMessage}`,
         'any.required': `password - ${requiredMessage}`,

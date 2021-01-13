@@ -34,6 +34,7 @@ const corsOptions = {
     'x-access-token',
     'Access-Control-Allow-Headers',
     'Authorization',
+    'Bearer',
   ],
   credentials: true,
 }
